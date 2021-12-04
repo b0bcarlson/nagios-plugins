@@ -134,7 +134,6 @@ sub human2bytes {
         $number *= 1024;
         $offset++;
     }
-
     return $number/$bitmod;
 }
 

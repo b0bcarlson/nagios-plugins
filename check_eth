@@ -139,8 +139,8 @@ sub human2bytes {
 
     return $number/$bitmod;
 }
-
-unlink($tmpfile);
+sub usage {
+    unlink($tmpfile);
     print "Unknown error";
     exit $status{UNKNOWN};
 }

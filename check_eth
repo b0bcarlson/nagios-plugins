@@ -107,8 +107,6 @@ $output .= sprintf( " | rx=%.0f;%2.0f;%2.0f tx=%.0f;%2.0f;%2.0f",
 print "$output\n";
 exit( $exit_status );
 
-
-# helper function
 sub bytes2human {
     my $bytes = shift;
     return 0 if !$bytes;

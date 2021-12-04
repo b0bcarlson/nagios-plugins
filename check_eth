@@ -44,7 +44,7 @@ usage() if ( !$iface || !$warning || !$critical );
 
 $warning = human2bytes($warning);
 $critical = human2bytes($critical);
-usage() if ( !$warning || !$critical )
+usage() if ( !$warning || !$critical );
 
 usage() if ( $warning > $critical );
 

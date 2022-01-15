@@ -1,0 +1,4 @@
+#!/bin/bash
+proc=$(ps a -Ao pcpu,command --sort=-pcpu --no-headers | head -n 1)
+IFS=' ' read -r -a parts <<< "$proc"
+echo "|cpu=${parts[0]} proc=${parts[@]:1}"

@@ -48,7 +48,7 @@ usage() if ( !$warning || !$critical );
 
 usage() if ( $warning > $critical );
 
-open ( NET, "</proc/net/dev" ) or die ( "Can't open /proc/net/dev: $!" );
+open ( NET, "</proc/net/dev" ) or open( NET, "-|", "/usr/bin/netstat -i -b -n" );
 while ( <NET> ) {
     chomp();
     if ( $_ =~ /^\s*($iface)\:\s*(\d+)(?:\s*(?:\d+)){7}\s*(\d+)(?:\s*(?:\d+)){7}\s*$/ ) {
@@ -56,6 +56,11 @@ while ( <NET> ) {
         $data{rxbytes} = $2; 
         $data{txbytes} = $3;
         last;
+    }
+    elsif ( $_ =~ /^\s*($iface)\s*(?:\S+\s+){6}(\d+)\s+(?:\S+\s+){2}(\d+)(?:\s+\S+)$/ ) {
+        $data{time} = time - 1; 
+        $data{rxbytes} = $data{rxbytes} + $2;
+        $data{txbytes} = $data{txbytes} + $3;
     }
 }
 close( NET );

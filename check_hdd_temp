@@ -1,0 +1,4 @@
+#!/bin/sh
+
+result=$(sudo hddtemp -n $1)
+echo "$result°C|temp=$result"

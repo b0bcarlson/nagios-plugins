@@ -1,0 +1,5 @@
+result=$(service $1 status)
+
+if [ $? -ne 0 ]; then
+	exit 2
+fi

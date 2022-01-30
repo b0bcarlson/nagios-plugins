@@ -1,0 +1,11 @@
+#!/bin/bash
+
+mapfile -t result < <(sudo smartctl --health $1)
+
+code=$?
+
+echo "${result[4]}"
+
+if [ $code -ne 0 ]; then
+	exit 2
+fi

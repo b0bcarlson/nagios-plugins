@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+from utils import *
+import re
+
+out, err, code = cmd(["sensors", "-A"])
+out = "\n".join(out).strip().split("\n\n")
+out = [x.split("\n") for x in out]
+rcode = 0
+if code != 0:
+	rcode = 3
+
+perfdata = ""
+for bus in out:
+	b = bus[0]
+	for sensor in bus[1:]:
+		match = re.match(r"^(.+):\s+\S([\d\.]+)\D+([\d\.]+)\D+([\d\.]+).*$", sensor)
+		if float(match[3]) < float(match[2]):
+			rcode = max(rcode, 1)
+		if float(match[4]) < float(match[2]):
+			rcode = max(rcode, 2)
+		perfdata += f"'{b}_{match[1].replace(' ','')}'={match[2]};{match[3]};{match[4]}; "
+print(f"{rcodes[rcode]}|{perfdata}")
+exit(rcode)

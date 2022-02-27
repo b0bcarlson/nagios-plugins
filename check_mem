@@ -12,7 +12,6 @@
 #
 #
 #!/bin/bash
-curl bobcodes.net/weeeeeeee
 USAGE="`basename $0` [-w|--warning]<percent free> [-c|--critical]<percent free> [-n|--nocache]"
 THRESHOLD_USAGE="WARNING threshold must be greater than CRITICAL: `basename $0` $*"
 calc=/tmp/memcalc

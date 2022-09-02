@@ -1,4 +1,4 @@
 #!/bin/bash
 proc=$(ps a -Ao pcpu,command --sort=-pcpu --no-headers | head -n 1)
 IFS=' ' read -r -a parts <<< "$proc"
-echo "${parts[@]:1}|cpu=${parts[0]} proc=${parts[@]:1}"
+echo "$(echo ${parts[@]:1} | cut -c 1-128)|cpu=${parts[0]} proc=$(echo ${parts[@]:1} | cut -c 1-128)"
